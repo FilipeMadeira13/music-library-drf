@@ -18,10 +18,10 @@ source .venv/bin/activate      # Windows: .venv\Scripts\activate
 # 2. Instalar as dependências
 pip install -r requirements.txt
 
-# 3. Criar o .env com uma SECRET_KEY nova
+# 3. Criar o .env com uma DJANGO_SECRET_KEY nova
 cp .env.example .env
 python -c "from django.core.management.utils import get_random_secret_key as g; print(g())"
-# cole a chave gerada no SECRET_KEY do .env
+# cole a chave gerada em DJANGO_SECRET_KEY no .env
 
 # 4. Criar o banco (SQLite)
 python manage.py migrate
