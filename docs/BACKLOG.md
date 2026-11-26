@@ -44,10 +44,10 @@ Criar o virtualenv, o projeto Django, o app `biblioteca` e o `requirements.txt` 
 ### T02 – Ler a `SECRET_KEY` do ambiente
 **Requisitos:** RNF07 · **Depende de:** T01
 
-- [ ] `settings.py` lê a chave de `os.environ["DJANGO_SECRET_KEY"]`.
-- [ ] Sem a variável, o Django para com `ImproperlyConfigured` e uma mensagem que diz qual variável falta.
-- [ ] Nenhuma chave aparece no código (`grep -r "django-insecure" .` não encontra nada fora do virtualenv).
-- [ ] Há um `.env.example` com `DJANGO_SECRET_KEY=` e uma instrução de como gerar a chave.
+- [x] `settings.py` lê a chave de `os.environ["DJANGO_SECRET_KEY"]`.
+- [x] Sem a variável, o Django para com `ImproperlyConfigured` e uma mensagem que diz qual variável falta.
+- [x] Nenhuma chave aparece no código (`grep -r "django-insecure" .` não encontra nada fora do virtualenv).
+- [x] Há um `.env.example` com `DJANGO_SECRET_KEY=` e uma instrução de como gerar a chave.
 
 ### T03 – Configurar o DRF
 **Requisitos:** RNF04 · **Depende de:** T01
