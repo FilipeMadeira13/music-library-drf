@@ -2,7 +2,7 @@
 
 API REST em Django + Django REST Framework para cadastrar álbuns, dar notas e organizá-los por artista.
 
-> Estado atual: projeto Django criado (`setup`) e app `biblioteca` registrado. Modelos, endpoints e autenticação ainda não foram implementados.
+> Estado atual: DRF configurado (autenticação por token, paginação, filtros; `pt-br`, fuso `America/Fortaleza`). Modelos e endpoints ainda não foram implementados.
 
 ## Requisitos
 
@@ -49,3 +49,6 @@ python manage.py test
 | `biblioteca/` | App com os modelos e a API |
 | `docs/REQUIREMENTS.md` | Requisitos funcionais |
 | `docs/BACKLOG.md` | Tarefas, decisões e critérios de aceite |
+| `docs/adr/` | Registros de decisões de arquitetura |
+| `CHANGELOG.md` | Mudanças por tarefa |
+| `CLAUDE.md` | Instruções para o Claude Code |

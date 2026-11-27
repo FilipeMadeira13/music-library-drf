@@ -13,7 +13,8 @@ Baseado em [REQUIREMENTS.md](REQUIREMENTS.md). Cada tarefa leva cerca de 1h e te
 | Paginação | `PageNumberPagination` com `page_size = 20`. |
 | Ordem padrão | Artistas por `nome`, álbuns por `titulo`. |
 | `?genero=` | Igual, ignorando maiúsculas (`iexact`). |
-| Idioma | URLs, campos e parâmetros em português, sem acento. |
+| Idioma | URLs, campos e parâmetros em português, sem acento. `LANGUAGE_CODE = "pt-br"`: as mensagens padrão do Django/DRF saem em português. |
+| Fuso horário | `TIME_ZONE = "America/Fortaleza"` com `USE_TZ = True`. Datas são gravadas em UTC; o "ano atual" é o ano local (`timezone.localdate().year`). |
 | Filtros | `django-filter`. |
 | `?sem_nota=false` | Devolve só os álbuns com nota. |
 | Campo de ordenação do ano | `ano_lancamento`. |
@@ -33,7 +34,7 @@ Baseado em [REQUIREMENTS.md](REQUIREMENTS.md). Cada tarefa leva cerca de 1h e te
 ### T01 – Criar o projeto Django e o app `biblioteca`
 **Requisitos:** RNF01, RNF02, RNF03 · **Depende de:** nenhuma
 
-Criar o virtualenv, o projeto Django, o app `biblioteca` e o `requirements.txt` com Django, djangorestframework e django-filter. O banco é o SQLite padrão.
+Criar o virtualenv, o projeto Django, o app `biblioteca` e o `requirements.txt` com Django, djangorestframework, django-filter e python-dotenv (ADR 0001). O banco é o SQLite padrão.
 
 - [x] `pip install -r requirements.txt` instala tudo sem erro.
 - [x] `python manage.py check` termina sem erros.
@@ -44,20 +45,21 @@ Criar o virtualenv, o projeto Django, o app `biblioteca` e o `requirements.txt` 
 ### T02 – Ler a `SECRET_KEY` do ambiente
 **Requisitos:** RNF07 · **Depende de:** T01
 
-- [x] `settings.py` lê a chave de `os.environ["DJANGO_SECRET_KEY"]`.
-- [x] Sem a variável, o Django para com `ImproperlyConfigured` e uma mensagem que diz qual variável falta.
+- [x] `settings.py` lê a chave de `DJANGO_SECRET_KEY` (carregada do `.env` por python-dotenv).
+- [x] Sem a variável, ou com ela vazia, o Django para com `ImproperlyConfigured` e uma mensagem que diz qual variável falta.
 - [x] Nenhuma chave aparece no código (`grep -r "django-insecure" .` não encontra nada fora do virtualenv).
 - [x] Há um `.env.example` com `DJANGO_SECRET_KEY=` e uma instrução de como gerar a chave.
 
 ### T03 – Configurar o DRF
-**Requisitos:** RNF04 · **Depende de:** T01
+**Requisitos:** RNF04, RNF08 · **Depende de:** T01
 
 Em `INSTALLED_APPS`: `rest_framework`, `rest_framework.authtoken`, `django_filters` e `biblioteca`. Em `REST_FRAMEWORK`: `TokenAuthentication`, `IsAuthenticated`, `PageNumberPagination` com `PAGE_SIZE = 20`, `DjangoFilterBackend` e `OrderingFilter`.
 
-- [ ] `python manage.py migrate` cria a tabela `authtoken_token`.
-- [ ] `TokenAuthentication` é a única classe de autenticação padrão.
-- [ ] `IsAuthenticated` é a permissão padrão.
-- [ ] A paginação e os backends de filtro estão configurados como padrão.
+- [x] `python manage.py migrate` cria a tabela `authtoken_token`.
+- [x] `TokenAuthentication` é a única classe de autenticação padrão.
+- [x] `IsAuthenticated` é a permissão padrão.
+- [x] A paginação e os backends de filtro estão configurados como padrão.
+- [x] `LANGUAGE_CODE = "pt-br"` e `TIME_ZONE = "America/Fortaleza"` (RNF08).
 
 ### T04 – Endpoint para obter o token
 **Requisitos:** RNF04 · **Depende de:** T03
@@ -138,7 +140,7 @@ O DRF não valida sozinho uma constraint com `Lower()`, então é preciso escrev
 - [ ] Teste: apagar no ORM um artista que tem álbuns levanta `ProtectedError`.
 
 ### T10 – CRUD de `/api/albuns/`
-**Requisitos:** RF04, RNF04 · **Depende de:** T09
+**Requisitos:** RF04, RNF04 · **Depende de:** T03, T09
 
 - [ ] `POST`, `GET` (lista e detalhe), `PUT`, `PATCH` e `DELETE` respondem 201, 200, 200, 200 e 204.
 - [ ] Id inexistente → 404.
@@ -156,14 +158,14 @@ O DRF não valida sozinho uma constraint com `Lower()`, então é preciso escrev
 - [ ] Só com `titulo` e `artista` → 201, com `ano_lancamento`, `nota` e `avaliado_em` nulos e `genero` vazio.
 
 ### T12 – Validar o ano de lançamento
-**Requisitos:** RF05, RNF05 · **Depende de:** T10
+**Requisitos:** RF05, RNF05, RNF08 · **Depende de:** T10
 
 - [ ] `ano_lancamento = 1900` → aceito.
 - [ ] `ano_lancamento` igual ao ano atual → aceito.
 - [ ] `1899` → 400 com a chave `ano_lancamento`.
 - [ ] O ano atual + 1 → 400 com a chave `ano_lancamento`.
 - [ ] `null` ou campo ausente → aceito.
-- [ ] O ano atual é calculado na hora (`timezone.now().year`), não fica fixo no código. Os testes também calculam o ano.
+- [ ] O ano atual é calculado na hora, no fuso local (`timezone.localdate().year`), não fica fixo no código. Os testes também calculam o ano.
 
 ### T13 – Título único por artista
 **Requisitos:** RF06, RNF05 · **Depende de:** T10
@@ -331,3 +333,4 @@ E6: T23 → T24
 | RNF05 | T07, T11, T12, T13, T14 |
 | RNF06 | T24 (e os testes de cada tarefa) |
 | RNF07 | T02, T23 |
+| RNF08 | T03, T12 |
