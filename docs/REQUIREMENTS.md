@@ -40,7 +40,7 @@ Só eu (usuário único).
 - RF12: Filtrar álbuns sem nota, ou seja, a lista "quero ouvir" (`?sem_nota=true`).
 - RF13: Filtrar álbuns por gênero (`?genero=`).
 - RF14: Ordenar álbuns por nota, ano ou título (`?ordering=-nota`).
-- RF15: Listar os álbuns de um artista (`GET /artistas/<id>/albuns/`).
+- RF15: Listar os álbuns de um artista (`GET /api/artistas/<id>/albuns/`).
 
 ## Requisitos não funcionais
 - RNF01: Python + Django + Django REST Framework.
@@ -50,6 +50,7 @@ Só eu (usuário único).
 - RNF05: Erros de validação respondem 400 com uma mensagem clara do campo inválido.
 - RNF06: As regras de negócio (nota, unicidade, data de avaliação, proteção do artista) têm testes automatizados (`python manage.py test`).
 - RNF07: Segredos (`SECRET_KEY`) lidos de variável de ambiente, nunca no código.
+- RNF08: Fuso horário `America/Fortaleza` e idioma `pt-br` (mensagens padrão do Django/DRF em português). O "ano atual" é o ano no fuso local.
 
 ## Fora do escopo
 - Recomendações e integração com APIs externas (Last.fm, Spotify).
