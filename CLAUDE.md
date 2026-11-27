@@ -6,6 +6,7 @@ API REST pessoal para catalogar álbuns de música, dar notas e organizá-los po
 - O que o sistema deve fazer: [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) (RF01–RF15, RNF01–RNF08).
 - Como e em que ordem construir: [docs/BACKLOG.md](docs/BACKLOG.md) (tarefas T01–T24, com critérios de aceite).
 - Decisões de arquitetura: [docs/adr/](docs/adr/). Mudanças: [CHANGELOG.md](CHANGELOG.md) (atualize ao fechar cada tarefa).
+- Onde paramos: [docs/progresso.md](docs/progresso.md). Leia no início da sessão; ao encerrar, atualize-o (feito com hashes, próximos passos, dúvidas), o status no BACKLOG e crie uma ADR para cada decisão não óbvia.
 
 Esses dois arquivos são a fonte da verdade. Se algo aqui conflitar com eles, valem eles. Se uma tarefa pedir algo que não está nos documentos, pergunte antes de inventar.
 

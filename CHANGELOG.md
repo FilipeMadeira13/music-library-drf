@@ -3,7 +3,14 @@
 Mudanças relevantes do projeto, da mais recente para a mais antiga.
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). Como o projeto não tem versões, cada bloco corresponde a uma tarefa do [backlog](docs/BACKLOG.md).
 
-## [Não lançado] – T03 (branch `t03-drf`)
+## [Não lançado]
+
+### Adicionado
+- `docs/progresso.md` com o diário das sessões.
+- `docs/adr/0002-fuso-local-e-pt-br.md` (aceito).
+- Seção "Status" no BACKLOG.
+
+## T03 – Configurar o DRF – 2026-11-27
 
 ### Adicionado
 - DRF configurado: `rest_framework`, `rest_framework.authtoken` e `django_filters` em `INSTALLED_APPS`.

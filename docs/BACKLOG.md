@@ -20,6 +20,17 @@ Baseado em [REQUIREMENTS.md](REQUIREMENTS.md). Cada tarefa leva cerca de 1h e te
 | Campo de ordenação do ano | `ano_lancamento`. |
 | `?artista=<id>` inexistente | Responde 400. |
 
+## Status
+
+Atualizado em 2026-11-27. Detalhes de cada sessão em [progresso.md](progresso.md).
+
+| Tarefa | Status |
+|---|---|
+| T01, T02 | Concluídas (PR #1) |
+| T03 | Concluída (PR #2) |
+| T04 | **Próxima** |
+| T05–T24 | A fazer |
+
 ## Definição de pronto (vale para todas as tarefas)
 
 - [ ] Todos os critérios de aceite da tarefa estão cobertos por testes ou foram conferidos com um request.
